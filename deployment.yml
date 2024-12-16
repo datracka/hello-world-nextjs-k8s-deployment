@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextjs-app-deployment
+  # namespace: finance-api # by default, it will be created in the default namespace
+  labels:
+    app: nextjs-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nextjs-app
+  template:
+    metadata:
+      labels:
+        app: nextjs-app
+    spec:
+      containers:
+      - name: nextjs-app-container
+        image: PLACEHOLDER_IMAGE # PLACEHOLDER_IMAGE
+        resources:
+          requests:
+            cpu: "0.1"           
+            memory: "512Mi"
+          limits:
+            cpu: "0.1"
+            memory: "512Mi"
+        ports:
+        - containerPort: 3000

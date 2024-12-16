@@ -1,0 +1,40 @@
+name: Deploy to Kubernetes on EC2
+
+on:
+  workflow_dispatch:
+    inputs:
+      IMAGE_TAG:
+        description: "Tag for the Docker image"
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_HUB_REPOSITORY: ${{ secrets.DOCKER_HUB_REPOSITORY }}
+      IMAGE_NAME: "api"
+      IMAGE_TAG: ${{ github.event.inputs.IMAGE_TAG }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install kubectl
+        run: |
+          curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x ./kubectl
+          sudo mv ./kubectl /usr/local/bin/kubectl
+
+      - name: Configure kubeconfig for the cluster
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG_CONTENT }}" > ~/.kube/config  # Assuming you're storing the kubeconfig content in a GitHub secret
+          cat ~/.kube/config  # Optional: Verify the kubeconfig file
+
+      - name: Verify kubectl connection
+        run: |
+          kubectl get nodes
+
+      - name: Prepare deployment file
+        run: |
+          sed -i "s|image: PLACEHOLDER_IMAGE|image: ${{ env.DOCKER_HUB_REPOSITORY }}:${{ env.IMAGE_TAG }}|" deployment.yml
+          cat deployment.yml  # Output the deployment file for verification
