@@ -27,11 +27,13 @@ jobs:
       - name: Configure kubeconfig for the cluster
         run: |
           mkdir -p ~/.kube
-          echo "${{ secrets.KUBECONFIG_CONTENT }}" > ~/.kube/config  # Assuming you're storing the kubeconfig content in a GitHub secret
-          cat ~/.kube/config  # Optional: Verify the kubeconfig file
+          echo "${{ secrets.KUBECONFIG_CONTENT }}" | base64 -d > ~/.kube/config
+          chmod 600 ~/.kube/config
 
       - name: Verify kubectl connection
         run: |
+          kubectl config view
+          kubectl cluster-info
           kubectl get nodes
 
       - name: Prepare deployment file
