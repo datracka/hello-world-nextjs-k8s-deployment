@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nextjs-app-deployment
-  # namespace: finance-api # by default, it will be created in the default namespace
   labels:
     app: nextjs-app
 spec:

@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DOCKER_HUB_REPOSITORY: ${{ secrets.DOCKER_HUB_REPOSITORY }}
-      IMAGE_NAME: "api"
+      IMAGE_NAME: "nextjs-app"
       IMAGE_TAG: ${{ github.event.inputs.IMAGE_TAG }}
     steps:
       - name: Checkout repository
