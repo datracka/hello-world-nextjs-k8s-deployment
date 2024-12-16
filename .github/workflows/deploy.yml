@@ -38,5 +38,28 @@ jobs:
 
       - name: Prepare deployment file
         run: |
+          # Print environment variables
+          echo "DOCKER_HUB_REPOSITORY: ${{ env.DOCKER_HUB_REPOSITORY }}"
+          echo "IMAGE_TAG: ${{ env.IMAGE_TAG }}"
+          
+          # Print the deployment file before replacement
+          echo "Before replacement:"
+          cat deployment.yml
+          
+          # Do the replacement
           sed -i "s|image: PLACEHOLDER_IMAGE|image: ${{ env.DOCKER_HUB_REPOSITORY }}:${{ env.IMAGE_TAG }}|" deployment.yml
-          cat deployment.yml  # Output the deployment file for verification
+          
+          # Print the deployment file after replacement
+          echo "After replacement:"
+          cat deployment.yml
+          
+          # Verify the exact image string that will be used
+          echo "Expected image string: ${{ env.DOCKER_HUB_REPOSITORY }}:${{ env.IMAGE_TAG }}"
+          grep "image:" deployment.yml
+
+      # Add this new step to actually apply the deployment
+      - name: Apply deployment
+        run: |
+          kubectl apply -f deployment.yml
+          kubectl get deployments
+          kubectl get pods
