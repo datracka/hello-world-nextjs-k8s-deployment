@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nextjs-app-container
-        image: datracka/nextjs-app:e6c45f1231814f64dc938650af65076b999f513e
+        image: PLACEHOLDER_IMAGE
         resources:
           requests:
             cpu: "0.1"           
