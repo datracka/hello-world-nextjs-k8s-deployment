@@ -28,7 +28,7 @@ jobs:
       - name: Configure kubeconfig for the cluster
         run: |
           mkdir -p ~/.kube
-          echo ${{ env.KUBECONFIG_CONTENT }}" | base64 -d > ~/.kube/config
+          echo ${{ env.KUBECONFIG_CONTENT }} | base64 -d > ~/.kube/config
           chmod 600 ~/.kube/config
 
       - name: Verify kubectl connection
