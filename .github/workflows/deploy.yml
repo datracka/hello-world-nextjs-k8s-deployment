@@ -11,9 +11,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      DOCKER_HUB_REPOSITORY: ${{ secrets.DOCKER_HUB_REPOSITORY }}
-      IMAGE_NAME: "nextjs-app"
+      DOCKER_HUB_REPOSITORY: ${{ vars.DOCKER_HUB_USERNAME }}/${{ vars.DOCKER_HUB_REPOSITORY }}
+      IMAGE_NAME: ${{ vars.DOCKER_HUB_REPOSITORY }}
       IMAGE_TAG: ${{ github.event.inputs.IMAGE_TAG }}
+      KUBECONFIG_CONTENT: ${{ secrets.KUBECONFIG_CONTENT }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,7 +28,7 @@ jobs:
       - name: Configure kubeconfig for the cluster
         run: |
           mkdir -p ~/.kube
-          echo "${{ secrets.KUBECONFIG_CONTENT }}" | base64 -d > ~/.kube/config
+          echo ${{ env.KUBECONFIG_CONTENT }}" | base64 -d > ~/.kube/config
           chmod 600 ~/.kube/config
 
       - name: Verify kubectl connection
