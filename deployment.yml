@@ -26,3 +26,15 @@ spec:
             memory: "512Mi"
         ports:
         - containerPort: 3000
+        env:
+        - name: DATABASE_HOST
+          value: PLACEHOLDER_HOST
+        - name: DATABASE_PORT
+          value: PLACEHOLDER_PORT
+        - name: DATABASE_USER
+          value: PLACEHOLDER_USER
+        - name: DATABASE_PASSWORD
+          value: PLACEHOLDER_PASSWORD
+        - name: DATABASE_NAME
+          value: PLACEHOLDER_NAME
+  
