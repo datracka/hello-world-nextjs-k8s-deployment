@@ -18,9 +18,14 @@ export default async function Home() {
     dbMessage = `Connected successfully! Server time: ${result.rows[0].current_time}`;
 
     await pool.end();
-  } catch (error: any) {
-    console.error("Database connection error:", error.message);
-    dbMessage = `Failed to connect to the database: ${error.message}`;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Database connection error:", error.message);
+      dbMessage = `Failed to connect to the database: ${error.message}`;
+    } else {
+      console.error("Unexpected error:", error);
+      dbMessage = "Failed to connect to the database: An unexpected error occurred.";
+    }
   }
 
   return (
