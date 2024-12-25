@@ -4,6 +4,11 @@ import getConfig from "next/config";
 
 const { serverRuntimeConfig } = getConfig();
 
+if (typeof window !== "undefined") {
+  console.log("Window is defined, running in browser");
+} else {
+  console.log("Window is undefined, running in server");
+}
 
 console.log("Environment Variables:", {
   test: serverRuntimeConfig.TEST_ENV,
