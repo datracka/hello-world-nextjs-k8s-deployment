@@ -4,19 +4,20 @@ import getConfig from "next/config";
 
 const { serverRuntimeConfig } = getConfig();
 
+
 export default async function Home() {
   let dbMessage = "Loading database connection status...";
 
+  console.log("Environment Variables:", {
+    host: serverRuntimeConfig.DATABASE_HOST,
+    port: Number(serverRuntimeConfig.DATABASE_PORT),
+    user: serverRuntimeConfig.DATABASE_USER,
+    password: serverRuntimeConfig.DATABASE_PASSWORD,
+    database: serverRuntimeConfig.DATABASE_NAME,
+  });
+
   try {
     const pool = new Pool({
-      host: serverRuntimeConfig.DATABASE_HOST,
-      port: Number(serverRuntimeConfig.DATABASE_PORT),
-      user: serverRuntimeConfig.DATABASE_USER,
-      password: serverRuntimeConfig.DATABASE_PASSWORD,
-      database: serverRuntimeConfig.DATABASE_NAME,
-    });
-
-    console.log("Environment Variables:", {
       host: serverRuntimeConfig.DATABASE_HOST,
       port: Number(serverRuntimeConfig.DATABASE_PORT),
       user: serverRuntimeConfig.DATABASE_USER,
