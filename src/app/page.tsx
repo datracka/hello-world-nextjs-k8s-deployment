@@ -4,6 +4,7 @@ import getConfig from "next/config";
 
 const { serverRuntimeConfig } = getConfig();
 
+
 console.log("Environment Variables:", {
   test: serverRuntimeConfig.TEST_ENV,
   host: serverRuntimeConfig.DATABASE_HOST,
