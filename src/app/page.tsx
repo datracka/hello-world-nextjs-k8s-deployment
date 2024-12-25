@@ -1,16 +1,27 @@
 import { Pool } from "pg";
 import React from "react";
+import getConfig from "next/config";
+
+const { serverRuntimeConfig } = getConfig();
 
 export default async function Home() {
   let dbMessage = "Loading database connection status...";
 
   try {
     const pool = new Pool({
-      host: process.env.DATABASE_HOST,
-      port: Number(process.env.DATABASE_PORT),
-      user: process.env.DATABASE_USER,
-      password: process.env.DATABASE_PASSWORD,
-      database: process.env.DATABASE_NAME,
+      host: serverRuntimeConfig.DATABASE_HOST,
+      port: Number(serverRuntimeConfig.DATABASE_PORT),
+      user: serverRuntimeConfig.DATABASE_USER,
+      password: serverRuntimeConfig.DATABASE_PASSWORD,
+      database: serverRuntimeConfig.DATABASE_NAME,
+    });
+
+    console.log("Environment Variables:", {
+      host: serverRuntimeConfig.DATABASE_HOST,
+      port: Number(serverRuntimeConfig.DATABASE_PORT),
+      user: serverRuntimeConfig.DATABASE_USER,
+      password: serverRuntimeConfig.DATABASE_PASSWORD,
+      database: serverRuntimeConfig.DATABASE_NAME,
     });
 
     // Test the connection with a simple query
