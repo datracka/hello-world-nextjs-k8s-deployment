@@ -28,13 +28,13 @@ spec:
         - containerPort: 3000
         env:
         - name: DATABASE_HOST
-          value: PLACEHOLDER_HOST
+          value: postgres
         - name: DATABASE_PORT
-          value: PLACEHOLDER_PORT
+          value: 5432
         - name: DATABASE_USER
-          value: PLACEHOLDER_USER
+          value: expertheroprod
         - name: DATABASE_PASSWORD
-          value: PLACEHOLDER_PASSWORD
+          value: 78VW3MTRXkMNrovPWmcYF4zk
         - name: DATABASE_NAME
-          value: PLACEHOLDER_NAME
+          value: experthero
   
