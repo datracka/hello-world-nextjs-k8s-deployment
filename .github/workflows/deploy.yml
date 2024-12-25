@@ -44,12 +44,12 @@ jobs:
           cat deployment.yml
           
           # Replace placeholders in the deployment file
-          sed -i "s|image: PLACEHOLDER_IMAGE|image: ${{ env.DOCKER_HUB_REPOSITORY }}:${{ env.IMAGE_TAG }}|" deployment.yml
-          # sed -i "s|value: PLACEHOLDER_HOST|value: \"${{ secrets.DATABASE_HOST }}\"|" deployment.yml
-          # sed -i "s|value: PLACEHOLDER_PORT|value: \"${{ secrets.DATABASE_PORT }}\"|" deployment.yml
-          # sed -i "s|value: PLACEHOLDER_USER|value: \"${{ secrets.DATABASE_USER }}\"|" deployment.yml
-          # sed -i "s|value: PLACEHOLDER_PASSWORD|value: \"${{ secrets.DATABASE_PASSWORD }}\"|" deployment.yml
-          # sed -i "s|value: PLACEHOLDER_NAME|value: \"${{ secrets.DATABASE_NAME }}\"|" deployment.yml
+          sed -i "s|PLACEHOLDER_IMAGE|${{ env.DOCKER_HUB_REPOSITORY }}:${{ env.IMAGE_TAG }}|" deployment.yml
+          sed -i "s|PLACEHOLDER_HOST|\"${{ secrets.DATABASE_HOST }}\"|" deployment.yml
+          sed -i "s|PLACEHOLDER_PORT|\"${{ secrets.DATABASE_PORT }}\"|" deployment.yml
+          sed -i "s|PLACEHOLDER_USER|\"${{ secrets.DATABASE_USER }}\"|" deployment.yml
+          sed -i "s|PLACEHOLDER_PASSWORD|\"${{ secrets.DATABASE_PASSWORD }}\"|" deployment.yml
+          sed -i "s|PLACEHOLDER_NAME|\"${{ secrets.DATABASE_NAME }}\"|" deployment.yml
           
           # Print modified deployment.yml
           echo "After replacement:"

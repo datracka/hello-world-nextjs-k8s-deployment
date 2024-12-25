@@ -27,14 +27,16 @@ spec:
         ports:
         - containerPort: 3000
         env:
+        - name: TEST_ENV
+          value: "hello"
         - name: DATABASE_HOST
-          value: databasehost
+          value: PLACEHOLDER_HOST
         - name: DATABASE_PORT
-          value: "5432"
+          value: PLACEHOLDER_PORT
         - name: DATABASE_USER
           value: databaseuser
         - name: DATABASE_PASSWORD
-          value: databasepassword
+          value: PLACEHOLDER_PASSWORD
         - name: DATABASE_NAME
-          value: databasename
+          value: PLACEHOLDER_NAME
   
