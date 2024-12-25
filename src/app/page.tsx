@@ -21,7 +21,7 @@ export default async function Home() {
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error("Database connection error:", error.message);
-      dbMessage = `Failed to connect to the database: ${error.message}`;
+      dbMessage = `Failed to connect to the database: ${error.message} ${process.env.DATABASE_HOST} ${process.env.DATABASE_PORT} ${process.env.DATABASE_USER} ${process.env.DATABASE_PASSWORD} ${process.env.DATABASE_NAME}`;
     } else {
       console.error("Unexpected error:", error);
       dbMessage = "Failed to connect to the database: An unexpected error occurred.";
