@@ -1,5 +1,10 @@
 import { Pool } from "pg";
 import React from "react";
+import getConfig from "next/config";
+
+const { serverRuntimeConfig } = getConfig();
+
+console.log(JSON.stringify(serverRuntimeConfig));
 
 async function fetchDatabaseStatus() {
   let dbMessage = "Loading database connection status...";
@@ -7,11 +12,11 @@ async function fetchDatabaseStatus() {
   try {
     // Fetch runtime environment variables directly
     const pool = new Pool({
-      host: "postgres",
-      port: 5432,
-      user: "expertheroprod",
-      password: "78VW3MTRXkMNrovPWmcYF4zk",
-      database: "experthero",
+      host: serverRuntimeConfig.DATABASE_HOST,
+      port: Number(serverRuntimeConfig.DATABASE_PORT),
+      user: serverRuntimeConfig.DATABASE_USER,
+      password: serverRuntimeConfig.DATABASE_PASSWORD,
+      database: serverRuntimeConfig.DATABASE_NAME,
     });
 
     // Test the connection with a simple query
@@ -22,7 +27,7 @@ async function fetchDatabaseStatus() {
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error("Database connection error:", error.message);
-      dbMessage = `Failed to connect to the database: ${error.message}`;
+      dbMessage = `Failed to connect to the database: ${error.message} ${JSON.stringify(serverRuntimeConfig)}`;
     } else {
       console.error("Unexpected error:", error);
       dbMessage = "Failed to connect to the database: An unexpected error occurred.";
