@@ -7,11 +7,11 @@ async function fetchDatabaseStatus() {
   try {
     // Fetch runtime environment variables directly
     const pool = new Pool({
-      host: process.env.DATABASE_HOST,
-      port: Number(process.env.DATABASE_PORT),
-      user: process.env.DATABASE_USER,
-      password: process.env.DATABASE_PASSWORD,
-      database: process.env.DATABASE_NAME,
+      host: "postgres",
+      port: 5432,
+      user: "expertheroprod",
+      password: "78VW3MTRXkMNrovPWmcYF4zk",
+      database: "experthero",
     });
 
     // Test the connection with a simple query
@@ -22,7 +22,7 @@ async function fetchDatabaseStatus() {
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error("Database connection error:", error.message);
-      dbMessage = `Failed to connect to the database: ${error.message} DATABASE_HOST: ${process.env.DATABASE_HOST} DATABASE_PORT: ${process.env.DATABASE_PORT} DATABASE_USER: ${process.env.DATABASE_USER} DATABASE_PASSWORD: ${process.env.DATABASE_PASSWORD} DATABASE_NAME: ${process.env.DATABASE_NAME}`;
+      dbMessage = `Failed to connect to the database: ${error.message}`;
     } else {
       console.error("Unexpected error:", error);
       dbMessage = "Failed to connect to the database: An unexpected error occurred.";
