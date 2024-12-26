@@ -18,6 +18,11 @@ jobs:
       DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       IMAGE_NAME: ${{ vars.DOCKER_HUB_REPOSITORY }}
       IMAGE_TAG: ${{ github.sha }}
+      DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+      DATABASE_USER: ${{ secrets.DATABASE_USER }}
 
     steps:
       - name: Checkout repository
@@ -38,6 +43,12 @@ jobs:
           context: .
           push: true
           tags: ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          build-args: |
+            DATABASE_HOST=${{ env.DATABASE_HOST }}
+            DATABASE_NAME=${{ env.DATABASE_NAME }}
+            DATABASE_PASSWORD=${{ env.DATABASE_PASSWORD }}
+            DATABASE_PORT=${{ env.DATABASE_PORT }}
+            DATABASE_USER=${{ env.DATABASE_USER }}
 
       - name: Logout from Docker Hub
         run: docker logout

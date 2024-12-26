@@ -4,6 +4,20 @@ FROM node:18-alpine AS build
 # Set the working directory
 WORKDIR /app
 
+# Build arguments for environment variables
+ARG DATABASE_HOST
+ARG DATABASE_NAME
+ARG DATABASE_PASSWORD
+ARG DATABASE_PORT
+ARG DATABASE_USER
+
+# Set environment variables for build-time use
+ENV DATABASE_HOST=$DATABASE_HOST
+ENV DATABASE_NAME=$DATABASE_NAME
+ENV DATABASE_PASSWORD=$DATABASE_PASSWORD
+ENV DATABASE_PORT=$DATABASE_PORT
+ENV DATABASE_USER=$DATABASE_USER
+
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
