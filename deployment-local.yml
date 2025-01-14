@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nextjs-app-container
-        image: PLACEHOLDER_IMAGE
+        image: helloworldnextjsk8sdeployment:6.0.0  # Update with your local image
         resources:
           requests:
             cpu: "0.1"           
@@ -28,15 +28,15 @@ spec:
         - containerPort: 3000
         env:
         - name: TEST_ENV
-          value: "hello world v1"
+          value: "hello world v2"
         - name: DATABASE_HOST
-          value: PLACEHOLDER_HOST
+          value: "host.docker.internal"
         - name: DATABASE_PORT
-          value: PLACEHOLDER_PORT
+          value: "5432"
         - name: DATABASE_USER
-          value: DATABASE_USER
+          value: "vicensfayos"
         - name: DATABASE_PASSWORD
-          value: PLACEHOLDER_PASSWORD
+          value: ""
         - name: DATABASE_NAME
-          value: PLACEHOLDER_NAME
+          value: "experthero"
   
