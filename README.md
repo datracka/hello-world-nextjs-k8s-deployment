@@ -26,6 +26,7 @@
 
 ```bash
     kubectl apply -f deployment-local.yml
+```
     
 - Expose the deployment
 
@@ -79,3 +80,9 @@ DOCKER_HUB_ACCESS_TOKEN
 # Ask for it to your infrastructure peer
 KUBECONFIG_CONTENT
 ```
+
+# TODOs
+
+- Minikube shows proper values in image 17.
+
+Now we should do a test in production to see how the next_public variable is passed in production where there is not a .env

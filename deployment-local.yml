@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nextjs-app-container
-        image: helloworldnextjsk8sdeployment:6.0.0  # Update with your local image
+        image: helloworldnextjsk8sdeployment:17.0.0  # Update with your local image
         resources:
           requests:
             cpu: "0.1"           
@@ -28,7 +28,7 @@ spec:
         - containerPort: 3000
         env:
         - name: TEST_ENV
-          value: "hello world v2"
+          value: "hello world runtime!"
         - name: DATABASE_HOST
           value: "host.docker.internal"
         - name: DATABASE_PORT
