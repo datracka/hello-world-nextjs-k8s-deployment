@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nextjs-app
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: nextjs-app
@@ -20,10 +20,10 @@ spec:
         resources:
           requests:
             cpu: "0.1"           
-            memory: "512Mi"
+            memory: "128Mi"
           limits:
             cpu: "0.1"
-            memory: "512Mi"
+            memory: "128Mi"
         ports:
         - containerPort: 3000
         env:
