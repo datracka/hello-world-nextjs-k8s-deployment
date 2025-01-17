@@ -2,7 +2,7 @@
 FROM node:18-alpine AS build
 
 # Declare the build argument
-# ARG NEXT_PUBLIC_TEST_ENV
+ARG NEXT_PUBLIC_TEST_ENV
 
 # Set the working directory
 WORKDIR /app
@@ -17,7 +17,7 @@ RUN npm install
 COPY . .
 
 # Set the environment variable for the build
-# ENV NEXT_PUBLIC_TEST_ENV=${NEXT_PUBLIC_TEST_ENV}
+ENV NEXT_PUBLIC_TEST_ENV=${NEXT_PUBLIC_TEST_ENV}
 
 # Build the application
 RUN npm run build
